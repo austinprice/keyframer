@@ -1,6 +1,5 @@
 import Ember from 'ember';
-// import { observer } from '@ember/object';
-// import { on } from '@ember/object/evented';
+import EmberObject from '@ember/object';
 
 export default Ember.Controller.extend({
 
@@ -47,6 +46,8 @@ export default Ember.Controller.extend({
     this.rewriteObjectCss();
   },
 
+  objCount: 1,
+
   baseObjCss: 'display: inline-block; position: absolute;',
 
   rewriteObjectCss() {
@@ -80,6 +81,42 @@ export default Ember.Controller.extend({
 
   actions: {
     rewriteStyles() {
+      this.rewriteObjectCss();
+    },
+
+    addObj() {
+      // Grab the objects array
+      const objArray = this.get('stageObjects');
+
+      // Grab the number of objects created and increment it to use for naming the new object
+      let objCount = this.get('objCount');
+      objCount ++;
+
+      // Create the new object
+      const newObj = {
+        name: `Object ${objCount}`,
+        domId: `object-${objCount}`,
+        baseStyles: {
+          background: '#0ACFFF',
+          borderColor: '',
+          borderWidth: 0,
+          borderRadius: 0,
+          height: 50,
+          left: 180,
+          top: 50,
+          width: 50
+        },
+        cssBaseStylesString: '',
+        keyframes: [],
+        cssKeyframesString: `
+          @keyframes object-1 {
+            
+          }
+        `
+      };
+
+      // Push the new object to the objects array
+      objArray.pushObject(newObj);
       this.rewriteObjectCss();
     }
   }
