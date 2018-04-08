@@ -1,0 +1,8 @@
+// Inputs
+// All styles for creating input elements
+// -------------------------------------------------------------------
+
+// Base text input mixin is in config/variables so it can be referenced by other elements (like dropdown)
+#{$all-text-inputs} {
+  @include base-text-input();
+}

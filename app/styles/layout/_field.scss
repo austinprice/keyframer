@@ -1,0 +1,87 @@
+// Field
+// All styles for laying out the field components
+
+.field {
+
+  &.inline {
+    display: inline-block;
+
+    label {
+      display: inline-block;
+      margin-right: 0.5rem;
+      text-align: right;
+      width: 1.25rem;
+    }
+  }
+
+  &.color {
+    position: relative;
+
+    span {
+      background: $primary;
+      border: $border;
+      border-radius: $border-radius;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      display: inline-block;
+      height: 2.68rem;
+      position: absolute;
+      top: 0.5rem;
+      width: 2.68rem;
+    }
+
+    #{$all-text-inputs} {
+      padding-left: 3.25rem;
+      width: 8.25rem;
+    }
+  }
+
+  &.pixels {
+    position: relative;
+
+    #{$all-text-inputs} {
+      padding-right: 1.25rem;
+      width: 6rem;
+    }
+
+    &:after {
+      content: 'px';
+      @include base-text-input-content();
+    }
+  }
+
+  &.percent {
+    position: relative;
+
+    #{$all-text-inputs} {
+      padding-right: 1.25rem;
+      width: 6rem;
+    }
+
+    &:after {
+      content: '%';
+      @include base-text-input-content();
+    }
+  }
+}
+
+
+.field-group {
+  padding: 1rem 0;
+
+  label {
+    margin-bottom: 0.5rem;
+  }
+
+  .field {
+    margin: 0 0.75rem;
+
+    &:first-child {
+      margin: 0 0.75rem 0 0;
+    }
+  }
+
+  .ember-view {
+    display: inline-block;
+  }
+}

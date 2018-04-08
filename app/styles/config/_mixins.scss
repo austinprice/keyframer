@@ -1,0 +1,25 @@
+// Mixins
+// All mixins used throughout the app
+// -------------------------------------------------------------------
+
+// Base Input
+@mixin base-text-input() {
+  background: $white;
+  border-radius: $border-radius;
+  border: $border;
+  margin: 0.5rem 0;
+  padding: 0.65rem;
+  font-size: 1em;
+
+  &.error {
+    border-color: $red;
+  }
+}
+
+@mixin base-text-input-content() {
+  color: $grey-mid;
+  display: block;
+  position: absolute;
+  right: 1.25rem;
+  top: 1.25rem;
+}

@@ -1,0 +1,44 @@
+<div class="stage">
+  {{#each stageObjects as |obj|}}
+    <div class="obj" style={{obj.cssBaseStylesString}}></div>
+  {{/each}}
+</div>
+
+<div class="toolbar">
+{{#each stageObjects as |obj|}}
+  <div class="toolbar-section dark-grey-bg">
+    <label>Object 1</label>
+  </div>
+  <div class="field-group toolbar-section">
+    <label>Position</label>
+    {{text-input-pixels keypressAction=(action 'rewriteStyles') value=obj.baseStyles.left label="X"}}
+    {{text-input-pixels label="Y"}}
+    <br/>
+    {{text-input-pixels label="W"}}
+    {{text-input-pixels label="H"}}
+  </div>
+  <div class="field-group toolbar-section">
+    <label>Background</label>
+    {{text-input-color}}
+    {{text-input-percent}}
+  </div>
+  <div class="field-group toolbar-section">
+    <label>Border</label>
+    {{text-input-color}}
+    {{text-input-percent}}
+    <br/>
+    {{select-dropdown options=borderOptions}}
+    {{text-input-pixels}}
+  </div>
+{{/each}}
+</div>
+
+<div class="timeline">
+  <div class="timeline-control-bar">
+    <label>Timeline</label>
+  </div>
+  <div class="timeline-percent-bar">
+    <span>+ Add Object</span>
+  </div>
+
+</div>

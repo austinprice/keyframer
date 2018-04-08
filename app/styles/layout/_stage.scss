@@ -1,0 +1,10 @@
+
+.stage {
+  background: $white;
+  display: inline-block;
+  height: calc(100vh - #{$timeline-height} - 4rem);
+  margin: 2rem 0 0 2rem;
+  padding: 2rem;
+  position: relative;
+  width: calc(100vw - #{$toolbar-width} - 4rem);
+}

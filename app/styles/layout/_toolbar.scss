@@ -1,0 +1,23 @@
+// Toolbar
+// All styles for laying out the toolbar
+
+.toolbar {
+  background: $light;
+  border-left: $border;
+  display: inline-block;
+  height: 100%;
+  overflow: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: $toolbar-width;
+
+  .toolbar-section {
+    padding: 1rem;
+    border-bottom: $border;
+  }
+
+  select {
+    width: 8.25rem;
+  }
+}

@@ -1,0 +1,25 @@
+
+.timeline {
+  background: $light;
+  border-top: $border;
+  bottom: 0;
+  //box-shadow: 0px -2px 20px rgba(0,0,0,0.1);
+  height: $timeline-height;
+  left: 0;
+  position: absolute;
+  //width: 100vw;
+  width: calc(100vw - #{$toolbar-width});
+
+  .timeline-control-bar {
+    border-bottom: $border;
+    padding: 1rem;
+  }
+
+  .timeline-percent-bar {
+    padding: 1rem;
+
+    #{$all-buttons} {
+      margin: 0;
+    }
+  }
+}
