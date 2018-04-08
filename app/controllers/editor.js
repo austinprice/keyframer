@@ -91,6 +91,7 @@ export default Ember.Controller.extend({
       // Grab the number of objects created and increment it to use for naming the new object
       let objCount = this.get('objCount');
       objCount ++;
+      this.set('objCount', objCount);
 
       // Create the new object
       const newObj = {

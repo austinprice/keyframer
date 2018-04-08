@@ -35,10 +35,15 @@
 
 <div class="timeline">
   <div class="timeline-control-bar">
-    <label>Timeline</label>
-  </div>
-  <div class="timeline-percent-bar">
     <button {{action 'addObj'}}>+ Add Object</button>
+  </div>
+  <div class="object-list">
+    {{#each stageObjects as |obj|}}
+      <div class="timeline-object">
+
+        <span class="obj-info"><span class="obj-color" style="background-color: {{obj.baseStyles.background}}"></span>{{obj.name}}</span>
+      </div>
+    {{/each}}
   </div>
 
 </div>
