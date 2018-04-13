@@ -4,18 +4,20 @@ import EmberObject from '@ember/object';
 export default Ember.Controller.extend({
 
   init() {
-    this.set('borderOptions', ['Solid', 'Dotted']);
+    this.set('borderOptions', ['None', 'Solid', 'Dotted']);
     this.set('stageObjects',[
       {
         name: 'Object 1',
         domId: 'object-1',
         baseStyles: {
-          background: '#0ACFFF',
+          background: '0ACFFF',
           borderColor: '',
+          borderStyle: 'None',
           borderWidth: 0,
           borderRadius: 0,
           height: 50,
           left: 50,
+          opacity: 1,
           top: 50,
           width: 50
         },
@@ -24,12 +26,14 @@ export default Ember.Controller.extend({
           {
             position: 50,
             styles: {
-              background: '#0ACFFF',
+              background: '0ACFFF',
               borderColor: '',
+              borderStyle: 'None',
               borderWidth: 0,
               borderRadius: 0,
               height: 50,
               left: 50,
+              opacity: 1,
               top: 50,
               width: 50
             }
@@ -56,20 +60,22 @@ export default Ember.Controller.extend({
 
     objs.forEach(function(obj) {
       const styles = obj.baseStyles;
-      Ember.set(obj, 'cssBaseStylesString', base + 'background:' + styles.background +
+      Ember.set(obj, 'cssBaseStylesString', base + 'background:#' + styles.background  +
+        '; border-style:' + styles.borderStyle +
         '; border-color:' + styles.borderColor +
         '; border-width:' + styles.borderWidth +
         '; border-radius:' + styles.borderRadius +
         'px; height:' + styles.height +
         'px; left:' + styles.left +
-        'px; top:' + styles.top +
+        'px; opacity:' + styles.opacity +
+        '; top:' + styles.top +
         'px; width:' + styles.width + 'px;');
 
-      let keyframeString = `0% {background: ${styles.background}; border-color: ${styles.borderColor}; border-width:${styles.borderWidth}; border-radius:${styles.borderRadius}; height:${styles.height}; left:${styles.left}; top:${styles.top}; width:${styles.width};}`;
+      let keyframeString = `0% {background: #${styles.background}; border-style:${styles.borderStyle}; border-color: ${styles.borderColor}; border-width:${styles.borderWidth}; border-radius:${styles.borderRadius}; height:${styles.height}; left:${styles.left}; opacity:${styles.opacity}; top:${styles.top}; width:${styles.width};}`;
 
       obj.keyframes.forEach(function(keyframe) {
         const keyframeStyles = keyframe.styles;
-        const keyframeDef = `${keyframe.position}% {background: ${keyframeStyles.background}; border-color: ${keyframeStyles.borderColor}; border-width:${keyframeStyles.borderWidth}; border-radius:${keyframeStyles.borderRadius}; height:${keyframeStyles.height}; left:${keyframeStyles.left}; top:${keyframeStyles.top}; width:${keyframeStyles.width};}`;
+        const keyframeDef = `${keyframe.position}% {background: #${keyframeStyles.background}; border-style:${keyframeStyles.borderStyle}; border-color: ${keyframeStyles.borderColor}; border-width:${keyframeStyles.borderWidth}; border-radius:${keyframeStyles.borderRadius}; height:${keyframeStyles.height}; left:${keyframeStyles.left}; opacity:${keyframeStyles.opacity}; top:${keyframeStyles.top}; width:${keyframeStyles.width};}`;
         keyframeString += keyframeDef;
       });
 
@@ -98,12 +104,14 @@ export default Ember.Controller.extend({
         name: `Object ${objCount}`,
         domId: `object-${objCount}`,
         baseStyles: {
-          background: '#0ACFFF',
+          background: '0ACFFF',
           borderColor: '',
+          borderStyle: 'None',
           borderWidth: 0,
           borderRadius: 0,
           height: 50,
           left: 180,
+          opacity: 1,
           top: 50,
           width: 50
         },
@@ -119,6 +127,10 @@ export default Ember.Controller.extend({
       // Push the new object to the objects array
       objArray.pushObject(newObj);
       this.rewriteObjectCss();
+    },
+
+    selectTimelineObject(obj) {
+      this.set('selectedObject', obj);
     }
   }
 

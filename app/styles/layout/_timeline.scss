@@ -29,19 +29,34 @@
     margin: 0;
   }
 
-  .timeline-object {
-    padding: 0.5rem 1rem;
+  .object-list {
+    padding: 0 0.5rem;
 
-    .obj-info {
+    .timeline-object {
+      padding: 0.5rem;
 
-      .obj-color {
-        background: $grey-mid;
+      .obj-info {
+        cursor: pointer;
+
+        .obj-color {
+          background: $grey-mid;
+          border-radius: $border-radius;
+          display: inline-block;
+          height: 12px;
+          margin-right: 5px;
+          vertical-align: middle;
+          width: 12px;
+        }
+      }
+
+      &.is-selected {
+        background: $grey-light;
         border-radius: $border-radius;
-        display: inline-block;
-        height: 12px;
-        margin-right: 5px;
-        vertical-align: middle;
-        width: 12px;
+      }
+
+      &:hover {
+        background: $grey-light;
+        border-radius: $border-radius;
       }
     }
   }

@@ -40,8 +40,8 @@
     position: relative;
 
     #{$all-text-inputs} {
-      padding-right: 1.25rem;
-      width: 6rem;
+      padding-right: 0.75rem;
+      width: 5rem;
     }
 
     &:after {
@@ -55,7 +55,7 @@
 
     #{$all-text-inputs} {
       padding-right: 1.25rem;
-      width: 6rem;
+      width: 5rem;
     }
 
     &:after {
