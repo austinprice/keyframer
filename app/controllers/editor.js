@@ -75,20 +75,20 @@ export default Ember.Controller.extend({
       Ember.set(obj, 'cssBaseStylesString', base + 'background:#' + styles.background  +
         //'; animation-name:' + obj.domId +
         '; border-style:' + styles.borderStyle +
-        '; border-color:' + styles.borderColor +
+        '; border-color:#' + styles.borderColor +
         '; border-width:' + styles.borderWidth +
-        '; border-radius:' + styles.borderRadius +
+        'px; border-radius:' + styles.borderRadius +
         'px; height:' + styles.height +
         'px; left:' + styles.left +
         'px; opacity:' + styles.opacity +
         '; top:' + styles.top +
         'px; width:' + styles.width + 'px;');
 
-      let keyframeString = `0% {background: #${styles.background}; border-style:${styles.borderStyle}; border-color: ${styles.borderColor}; border-width:${styles.borderWidth}px; border-radius:${styles.borderRadius}px; height:${styles.height}px; left:${styles.left}px; opacity:${styles.opacity}; top:${styles.top}px; width:${styles.width}px;}`;
+      let keyframeString = `0% {background: #${styles.background}; border-style:${styles.borderStyle}; border-color: #${styles.borderColor}; border-width:${styles.borderWidth}px; border-radius:${styles.borderRadius}px; height:${styles.height}px; left:${styles.left}px; opacity:${styles.opacity}; top:${styles.top}px; width:${styles.width}px;}`;
 
       obj.keyframes.forEach(function(keyframe) {
         const keyframeStyles = keyframe.styles;
-        let keyframeStyleString = `background: #${keyframeStyles.background}; border-style:${keyframeStyles.borderStyle}; border-color: ${keyframeStyles.borderColor}; border-width:${keyframeStyles.borderWidth}px; border-radius:${keyframeStyles.borderRadius}px; height:${keyframeStyles.height}px; left:${keyframeStyles.left}px; opacity:${keyframeStyles.opacity}; top:${keyframeStyles.top}px; width:${keyframeStyles.width}px;`;
+        let keyframeStyleString = `background: #${keyframeStyles.background}; border-style:${keyframeStyles.borderStyle}; border-color: #${keyframeStyles.borderColor}; border-width:${keyframeStyles.borderWidth}px; border-radius:${keyframeStyles.borderRadius}px; height:${keyframeStyles.height}px; left:${keyframeStyles.left}px; opacity:${keyframeStyles.opacity}; top:${keyframeStyles.top}px; width:${keyframeStyles.width}px;`;
         Ember.set(keyframe, 'cssString', keyframeStyleString);
         if (keyframe.active) {
           const keyframeDef = `${keyframe.position}% {${keyframeStyleString}}`;
@@ -187,10 +187,12 @@ export default Ember.Controller.extend({
     },
 
     selectTimelineObject(obj) {
+      this.set('playAnimation', false);
       this.set('selectedKeyframe', null);
       this.set('selectedObject', obj);
     },
     selectKeyframeObject(keyframe, obj) {
+      this.set('playAnimation', false);
       this.set('selectedObject', obj);
       this.set('selectedKeyframe', keyframe);
       Ember.set(this.get('selectedKeyframe'), 'active', true);

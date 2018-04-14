@@ -37,11 +37,16 @@
       {{text-input-percent keypressAction=(action 'rewriteStyles') value=selectedKeyframe.styles.opacity}}
     </div>
     <div class="field-group toolbar-section">
-      <label>Border</label>
-      {{select-dropdown options=borderOptions value=selectedKeyframe.styles.borderStyle}}
+      <label>Border Radius</label>
+      {{!--{{select-dropdown options=borderOptions value=selectedKeyframe.styles.borderStyle}}
       <br/>
       {{text-input-color keypressAction=(action 'rewriteStyles') value=selectedKeyframe.styles.borderColor}}
-      {{text-input-pixels keypressAction=(action 'rewriteStyles') value=selectedKeyframe.styles.borderWidth}}
+      {{text-input-pixels keypressAction=(action 'rewriteStyles') value=selectedKeyframe.styles.borderWidth}}--}}
+      {{text-input-pixels keypressAction=(action 'rewriteStyles') value=selectedKeyframe.styles.borderRadius}}
+    </div>
+    <div class="field-group toolbar-section">
+      <label>Opacity</label>
+      {{input type='number' keypressAction=(action 'rewriteStyles') value=selectedKeyframe.styles.opacity}}
     </div>
   {{else if selectedObject}}
     <div class="toolbar-section dark-grey-bg">
@@ -61,11 +66,16 @@
       {{text-input-percent keypressAction=(action 'rewriteStyles') value=selectedObject.baseStyles.opacity}}
     </div>
     <div class="field-group toolbar-section">
-      <label>Border</label>
-      {{select-dropdown options=borderOptions value=selectedObject.baseStyles.borderStyle}}
+      <label>Border Radius</label>
+      {{!--{{select-dropdown options=borderOptions value=selectedObject.baseStyles.borderStyle}}
       <br/>
       {{text-input-color keypressAction=(action 'rewriteStyles') value=selectedObject.baseStyles.borderColor}}
-      {{text-input-pixels keypressAction=(action 'rewriteStyles') value=selectedObject.baseStyles.borderWidth}}
+      {{text-input-pixels keypressAction=(action 'rewriteStyles') value=selectedObject.baseStyles.borderWidth}}--}}
+      {{text-input-pixels keypressAction=(action 'rewriteStyles') value=selectedObject.baseStyles.borderRadius}}
+    </div>
+    <div class="field-group toolbar-section">
+      <label>Opacity</label>
+      {{input type='number' keypressAction=(action 'rewriteStyles') value=selectedObject.baseStyles.opacity}}
     </div>
   {{/if}}
 </div>
