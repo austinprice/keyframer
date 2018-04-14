@@ -25,7 +25,7 @@ export default Ember.Controller.extend({
           width: 50
         },
         cssString: ''
-      }
+      };
       newKeyframes.pushObject(frame);
     });
 
@@ -60,7 +60,8 @@ export default Ember.Controller.extend({
   },
 
   availableKeyframes: [0,5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100],
-
+  animationDuration: 1,
+  animationIteration: 'infinite',
   objCount: 1,
 
   baseObjCss: 'display: inline-block; position: absolute;',
@@ -72,6 +73,7 @@ export default Ember.Controller.extend({
     objs.forEach(function(obj) {
       const styles = obj.baseStyles;
       Ember.set(obj, 'cssBaseStylesString', base + 'background:#' + styles.background  +
+        //'; animation-name:' + obj.domId +
         '; border-style:' + styles.borderStyle +
         '; border-color:' + styles.borderColor +
         '; border-width:' + styles.borderWidth +
@@ -109,9 +111,9 @@ export default Ember.Controller.extend({
         }
       });
 
-      obj.cssKeyframesString = `@keyframes ${obj.domId} {
+      Ember.set(obj, 'cssKeyframesString',`@keyframes ${obj.domId} {
          ${keyframeString};
-      }`;
+      }`);
     });
   },
 
@@ -208,6 +210,10 @@ export default Ember.Controller.extend({
     playAnimation() {
       this.set('selectedKeyframe', null);
       this.set('selectedObject', null);
+      this.set('playAnimation', true);
+    },
+    stopAnimation() {
+      this.set('playAnimation', false);
     }
   }
 
