@@ -1,11 +1,43 @@
 <div class="stage">
   {{#each stageObjects as |obj|}}
-    <div class="obj" style={{obj.cssBaseStylesString}} {{action 'selectTimelineObject' obj}}></div>
+    {{#if (eq selectedObject obj)}}
+      {{#if selectedKeyframe}}
+        <div class="obj" style={{selectedKeyframe.cssString}} {{action 'selectTimelineObject' obj}}></div>
+      {{else}}
+        <div class="obj" style={{obj.cssBaseStylesString}} {{action 'selectTimelineObject' obj}}></div>
+      {{/if}}
+    {{else}}
+      <div class="obj" style={{obj.cssBaseStylesString}} {{action 'selectTimelineObject' obj}}></div>
+    {{/if}}
   {{/each}}
 </div>
 
 <div class="toolbar">
-  {{#if selectedObject}}
+  {{#if selectedKeyframe}}
+    <div class="toolbar-section dark-grey-bg">
+      <label>{{selectedObject.name}} @ {{selectedKeyframe.position}}%</label>
+    </div>
+    <div class="field-group toolbar-section">
+      <label>Position</label>
+      {{text-input-pixels keypressAction=(action 'rewriteStyles') value=selectedKeyframe.styles.left label="X"}}
+      {{text-input-pixels keypressAction=(action 'rewriteStyles') value=selectedKeyframe.styles.top label="Y"}}
+      <br/>
+      {{text-input-pixels keypressAction=(action 'rewriteStyles') value=selectedKeyframe.styles.width label="W"}}
+      {{text-input-pixels keypressAction=(action 'rewriteStyles') value=selectedKeyframe.styles.height label="H"}}
+    </div>
+    <div class="field-group toolbar-section">
+      <label>Background</label>
+      {{text-input-color keypressAction=(action 'rewriteStyles') value=selectedKeyframe.styles.background}}
+      {{text-input-percent keypressAction=(action 'rewriteStyles') value=selectedKeyframe.styles.opacity}}
+    </div>
+    <div class="field-group toolbar-section">
+      <label>Border</label>
+      {{select-dropdown options=borderOptions value=selectedKeyframe.styles.borderStyle}}
+      <br/>
+      {{text-input-color keypressAction=(action 'rewriteStyles') value=selectedKeyframe.styles.borderColor}}
+      {{text-input-pixels keypressAction=(action 'rewriteStyles') value=selectedKeyframe.styles.borderWidth}}
+    </div>
+  {{else if selectedObject}}
     <div class="toolbar-section dark-grey-bg">
       <label>{{selectedObject.name}}</label>
     </div>
@@ -34,12 +66,42 @@
 
 <div class="timeline">
   <div class="timeline-control-bar">
-    <button {{action 'addObj'}}>+ Add Object</button>
+    <div class="timeline-controls">
+      <button {{action 'addObj'}}>+ Add Object</button>
+    </div>
+    <div class="timeline-percent-row">
+      <span>0%</span>
+      <span>5%</span>
+      <span>10%</span>
+      <span>15%</span>
+      <span>20%</span>
+      <span>25%</span>
+      <span>30%</span>
+      <span>35%</span>
+      <span>40%</span>
+      <span>45%</span>
+      <span>50%</span>
+      <span>55%</span>
+      <span>60%</span>
+      <span>65%</span>
+      <span>70%</span>
+      <span>75%</span>
+      <span>80%</span>
+      <span>85%</span>
+      <span>90%</span>
+      <span>95%</span>
+      <span>100%</span>
+    </div>
   </div>
   <div class="object-list">
     {{#each stageObjects as |obj|}}
       <div class="timeline-object {{if (eq selectedObject obj) 'is-selected'}}">
         <span class="obj-info" {{action 'selectTimelineObject' obj}}><span class="obj-color" style="background-color: #{{obj.baseStyles.background}}"></span>{{obj.name}}</span>
+        <span class="obj-timeline">
+          {{#each obj.keyframes as |keyframe|}}
+            <span><div class="keyframe {{if keyframe.active 'is-active'}}" {{action 'selectKeyframeObject' keyframe obj}}></div></span>
+          {{/each}}
+        </span>
       </div>
     {{/each}}
   </div>

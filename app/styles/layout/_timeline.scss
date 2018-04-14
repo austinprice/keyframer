@@ -13,8 +13,29 @@
   width: calc(100vw - #{$toolbar-width});
 
   .timeline-control-bar {
-    //border-bottom: $border;
-    padding: 1rem;
+    border-bottom: $border;
+    padding: 0.5rem 1rem;
+
+    .timeline-controls {
+      display: inline-block;
+      width: $timeline-x-width;
+    }
+
+    .timeline-percent-row {
+      display: inline-flex;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      width: calc(99% - #{$timeline-x-width});
+
+      span {
+        color: $dark;
+        cursor: default;
+        text-align: center;
+        width: 32px;
+        //display: inline-block;
+        //width: 4.45%;
+      }
+    }
   }
 
   .timeline-percent-bar {
@@ -37,6 +58,8 @@
 
       .obj-info {
         cursor: pointer;
+        display: inline-block;
+        width: $timeline-x-width;
 
         .obj-color {
           background: $grey-mid;
@@ -49,13 +72,52 @@
         }
       }
 
+      .obj-timeline {
+        background: tint($grey-mid, 50%);
+        border-radius: $border-radius;
+        display: inline-flex;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        height: 1rem;
+        vertical-align: middle;
+        width: calc(99% - #{$timeline-x-width});
+
+        span {
+          display: inline-block;
+          height: 100%;
+          text-align: center;
+          width: 100%;
+
+          .keyframe {
+            cursor: pointer;
+            display: inline-block;
+            background: transparent;
+            border-radius: 10px;
+            height: 12px;
+            width: 12px;
+
+            &.is-active {
+              background: $dark;
+
+              &:hover {
+                background: $dark;
+              }
+            }
+
+            &:hover {
+              background: $grey-mid;
+            }
+          }
+        }
+      }
+
       &.is-selected {
-        background: $grey-light;
+        background: $primary-light;
         border-radius: $border-radius;
       }
 
       &:hover {
-        background: $grey-light;
+        background: $primary-light;
         border-radius: $border-radius;
       }
     }

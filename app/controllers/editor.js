@@ -1,10 +1,35 @@
 import Ember from 'ember';
-import EmberObject from '@ember/object';
+import { get } from '@ember/object';
 
 export default Ember.Controller.extend({
 
   init() {
     this.set('borderOptions', ['None', 'Solid', 'Dotted']);
+    const availableKeyframes = this.get('availableKeyframes');
+    let newKeyframes = [];
+
+    availableKeyframes.forEach(function(keyframe) {
+      const frame = {
+        active: false,
+        position: keyframe,
+        styles: {
+          background: '0ACFFF',
+          borderColor: '',
+          borderStyle: 'None',
+          borderWidth: 0,
+          borderRadius: 0,
+          height: 50,
+          left: 50,
+          opacity: 1,
+          top: 50,
+          width: 50
+        },
+        cssString: ''
+      }
+      newKeyframes.pushObject(frame);
+    });
+
+    this.set('newKeyframes', newKeyframes);
     this.set('stageObjects',[
       {
         name: 'Object 1',
@@ -22,23 +47,7 @@ export default Ember.Controller.extend({
           width: 50
         },
         cssBaseStylesString: '',
-        keyframes: [
-          {
-            position: 50,
-            styles: {
-              background: '0ACFFF',
-              borderColor: '',
-              borderStyle: 'None',
-              borderWidth: 0,
-              borderRadius: 0,
-              height: 50,
-              left: 50,
-              opacity: 1,
-              top: 50,
-              width: 50
-            }
-          }
-        ],
+        keyframes: newKeyframes,
         cssKeyframesString: `
           @keyframes object-1 {
             
@@ -49,6 +58,8 @@ export default Ember.Controller.extend({
 
     this.rewriteObjectCss();
   },
+
+  availableKeyframes: [0,5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100],
 
   objCount: 1,
 
@@ -71,12 +82,31 @@ export default Ember.Controller.extend({
         '; top:' + styles.top +
         'px; width:' + styles.width + 'px;');
 
-      let keyframeString = `0% {background: #${styles.background}; border-style:${styles.borderStyle}; border-color: ${styles.borderColor}; border-width:${styles.borderWidth}; border-radius:${styles.borderRadius}; height:${styles.height}; left:${styles.left}; opacity:${styles.opacity}; top:${styles.top}; width:${styles.width};}`;
+      let keyframeString = `0% {background: #${styles.background}; border-style:${styles.borderStyle}; border-color: ${styles.borderColor}; border-width:${styles.borderWidth}px; border-radius:${styles.borderRadius}px; height:${styles.height}px; left:${styles.left}px; opacity:${styles.opacity}; top:${styles.top}px; width:${styles.width}px;}`;
 
       obj.keyframes.forEach(function(keyframe) {
         const keyframeStyles = keyframe.styles;
-        const keyframeDef = `${keyframe.position}% {background: #${keyframeStyles.background}; border-style:${keyframeStyles.borderStyle}; border-color: ${keyframeStyles.borderColor}; border-width:${keyframeStyles.borderWidth}; border-radius:${keyframeStyles.borderRadius}; height:${keyframeStyles.height}; left:${keyframeStyles.left}; opacity:${keyframeStyles.opacity}; top:${keyframeStyles.top}; width:${keyframeStyles.width};}`;
-        keyframeString += keyframeDef;
+        let keyframeStyleString = `background: #${keyframeStyles.background}; border-style:${keyframeStyles.borderStyle}; border-color: ${keyframeStyles.borderColor}; border-width:${keyframeStyles.borderWidth}px; border-radius:${keyframeStyles.borderRadius}px; height:${keyframeStyles.height}px; left:${keyframeStyles.left}px; opacity:${keyframeStyles.opacity}; top:${keyframeStyles.top}px; width:${keyframeStyles.width}px;`;
+        Ember.set(keyframe, 'cssString', keyframeStyleString);
+        if (keyframe.active) {
+          const keyframeDef = `${keyframe.position}% {${keyframeStyleString}}`;
+          keyframeString += keyframeDef;
+        } else {
+          const baseStyles = {
+            background: obj.baseStyles.background,
+            borderColor: obj.baseStyles.borderColor,
+            borderStyle: obj.baseStyles.borderStyle,
+            borderWidth: obj.baseStyles.borderWidth,
+            borderRadius: obj.baseStyles.borderRadius,
+            height: obj.baseStyles.height,
+            left: obj.baseStyles.left,
+            opacity: obj.baseStyles.opacity,
+            top: obj.baseStyles.top,
+            width: obj.baseStyles.width
+          };
+          Ember.set(keyframe, 'styles', baseStyles);
+          return;
+        }
       });
 
       obj.cssKeyframesString = `@keyframes ${obj.domId} {
@@ -93,6 +123,31 @@ export default Ember.Controller.extend({
     addObj() {
       // Grab the objects array
       const objArray = this.get('stageObjects');
+
+      // Grab the newKeyframes array
+      const availableKeyframes = this.get('availableKeyframes');
+      let newKeyframes = [];
+
+      availableKeyframes.forEach(function(keyframe) {
+        const frame = {
+          active: false,
+          position: keyframe,
+          styles: {
+            background: '0ACFFF',
+            borderColor: '',
+            borderStyle: 'None',
+            borderWidth: 0,
+            borderRadius: 0,
+            height: 50,
+            left: 50,
+            opacity: 1,
+            top: 50,
+            width: 50
+          },
+          cssString: ''
+        }
+        newKeyframes.pushObject(frame);
+      });
 
       // Grab the number of objects created and increment it to use for naming the new object
       let objCount = this.get('objCount');
@@ -116,9 +171,9 @@ export default Ember.Controller.extend({
           width: 50
         },
         cssBaseStylesString: '',
-        keyframes: [],
+        keyframes: newKeyframes,
         cssKeyframesString: `
-          @keyframes object-1 {
+          @keyframes object-${objCount} {
             
           }
         `
@@ -130,7 +185,14 @@ export default Ember.Controller.extend({
     },
 
     selectTimelineObject(obj) {
+      this.set('selectedKeyframe', false);
       this.set('selectedObject', obj);
+    },
+    selectKeyframeObject(keyframe, obj) {
+      this.set('selectedObject', obj);
+      this.set('selectedKeyframe', keyframe);
+      Ember.set(this.get('selectedKeyframe'), 'active', true);
+      this.rewriteObjectCss();
     }
   }
 
