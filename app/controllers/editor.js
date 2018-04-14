@@ -204,6 +204,10 @@ export default Ember.Controller.extend({
       }
 
       objArray.removeObject(obj);
+    },
+    playAnimation() {
+      this.set('selectedKeyframe', null);
+      this.set('selectedObject', null);
     }
   }
 
