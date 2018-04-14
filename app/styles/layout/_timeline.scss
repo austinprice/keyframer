@@ -22,6 +22,31 @@
     padding: 0.5rem;
     position: absolute;
     z-index: 99;
+
+    #{$all-buttons} {
+      //padding: 0.75rem;
+      position: relative;
+
+      &.play {
+        &:after {
+          @include triangle(right, 8px, 8px, $primary);
+          content: '';
+          display: inline-block;
+        }
+      }
+
+      &.stop {
+        background-color: $primary;
+
+        &:after {
+          content: '';
+          background: $white;
+          display: inline-block;
+          height: 8px;
+          width: 8px;
+        }
+      }
+    }
   }
 
   .timeline-control-bar {
@@ -134,13 +159,24 @@
             background: transparent;
             border-radius: 10px;
             height: 12px;
+            transition: 0.1s;
             width: 12px;
 
             &.is-active {
               background: $dark;
+              //border: 2px solid transparent;
 
               &:hover {
                 background: $dark;
+              }
+
+              &.is-selected {
+                //border-color: $white;
+                background: $primary;
+                box-shadow: $box-shadow;
+                margin-top: -2px;
+                height: 16px;
+                width: 16px;
               }
             }
 

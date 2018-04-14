@@ -83,9 +83,9 @@
 <div class="timeline">
   <div class="timeline-controls-sidebar">
     {{#if playAnimation}}
-      <button class="play" {{action 'stopAnimation'}}>S</button>
+      <button class="stop" {{action 'stopAnimation'}}></button>
     {{else}}
-      <button class="play" {{action 'playAnimation'}}>P</button>
+      <button class="play" {{action 'playAnimation'}}></button>
     {{/if}}
   </div>
   <div class="timeline-control-bar">
@@ -126,7 +126,7 @@
         </span>
         <span class="obj-timeline">
           {{#each obj.keyframes as |keyframe|}}
-            <span><div class="keyframe {{if keyframe.active 'is-active'}}" {{action 'selectKeyframeObject' keyframe obj}}></div></span>
+            <span><div class="keyframe {{if keyframe.active 'is-active'}} {{if (eq selectedKeyframe keyframe) 'is-selected'}}" {{action 'selectKeyframeObject' keyframe obj}}></div></span>
           {{/each}}
         </span>
       </div>
