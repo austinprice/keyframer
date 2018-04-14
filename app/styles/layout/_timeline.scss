@@ -1,7 +1,7 @@
 
 .timeline {
   background: $light;
-  border-top: $border;
+  //border-top: $border;
   bottom: 0;
   //box-shadow: 0px -2px 20px rgba(0,0,0,0.1);
   height: $timeline-height;
@@ -14,6 +14,7 @@
 
   .timeline-control-bar {
     border-bottom: $border;
+    border-top: $border;
     padding: 0.5rem 1rem;
 
     .timeline-controls {
@@ -29,9 +30,10 @@
 
       span {
         color: $dark;
-        cursor: default;
+        display: inline-block;
+        height: 100%;
         text-align: center;
-        width: 32px;
+        width: 100%;
         //display: inline-block;
         //width: 4.45%;
       }
@@ -57,8 +59,9 @@
       padding: 0.5rem;
 
       .obj-info {
-        cursor: pointer;
+        cursor: default;
         display: inline-block;
+        padding-right: 10px;
         width: $timeline-x-width;
 
         .obj-color {
@@ -69,6 +72,26 @@
           margin-right: 5px;
           vertical-align: middle;
           width: 12px;
+        }
+
+        .obj-name {
+
+        }
+
+        .remove-obj {
+          color: $dark;
+          cursor: pointer;
+          display: inline-block;
+          float: right;
+          font-size: 0.75rem;
+          font-weight: 600;
+          margin-top: 3px;
+          text-transform: uppercase;
+          vertical-align: middle;
+
+          &:hover {
+            color: $red;
+          }
         }
       }
 

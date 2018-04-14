@@ -7,4 +7,12 @@
   padding: 2rem;
   position: relative;
   width: calc(100vw - #{$toolbar-width} - 4rem);
+
+  .obj {
+
+    &.is-selected {
+      box-shadow: 0px 0px 4px rgba($black, 0.75);
+      z-index: 999;
+    }
+  }
 }

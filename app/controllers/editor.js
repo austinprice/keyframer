@@ -193,6 +193,10 @@ export default Ember.Controller.extend({
       this.set('selectedKeyframe', keyframe);
       Ember.set(this.get('selectedKeyframe'), 'active', true);
       this.rewriteObjectCss();
+    },
+    removeObject(obj) {
+      const objArray = this.get('stageObjects');
+      objArray.removeObject(obj);
     }
   }
 

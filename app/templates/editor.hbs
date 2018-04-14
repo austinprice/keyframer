@@ -2,12 +2,12 @@
   {{#each stageObjects as |obj|}}
     {{#if (eq selectedObject obj)}}
       {{#if selectedKeyframe}}
-        <div class="obj" style={{selectedKeyframe.cssString}} {{action 'selectTimelineObject' obj}}></div>
+        <div class="obj {{if (eq selectedObject obj) 'is-selected'}}" style={{selectedKeyframe.cssString}} {{action 'selectTimelineObject' obj}}></div>
       {{else}}
-        <div class="obj" style={{obj.cssBaseStylesString}} {{action 'selectTimelineObject' obj}}></div>
+        <div class="obj {{if (eq selectedObject obj) 'is-selected'}}" style={{obj.cssBaseStylesString}} {{action 'selectTimelineObject' obj}}></div>
       {{/if}}
     {{else}}
-      <div class="obj" style={{obj.cssBaseStylesString}} {{action 'selectTimelineObject' obj}}></div>
+      <div class="obj {{if (eq selectedObject obj) 'is-selected'}}" style={{obj.cssBaseStylesString}} {{action 'selectTimelineObject' obj}}></div>
     {{/if}}
   {{/each}}
 </div>
@@ -96,7 +96,11 @@
   <div class="object-list">
     {{#each stageObjects as |obj|}}
       <div class="timeline-object {{if (eq selectedObject obj) 'is-selected'}}">
-        <span class="obj-info" {{action 'selectTimelineObject' obj}}><span class="obj-color" style="background-color: #{{obj.baseStyles.background}}"></span>{{obj.name}}</span>
+        <span class="obj-info" {{action 'selectTimelineObject' obj}}>
+          <span class="obj-color" style="background-color: #{{obj.baseStyles.background}}"></span>
+          <span class="obj-name">{{obj.name}}</span>
+          <span class="remove-obj" {{action 'removeObject' obj}}>Delete</span>
+        </span>
         <span class="obj-timeline">
           {{#each obj.keyframes as |keyframe|}}
             <span><div class="keyframe {{if keyframe.active 'is-active'}}" {{action 'selectKeyframeObject' keyframe obj}}></div></span>
