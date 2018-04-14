@@ -2,12 +2,12 @@
   {{#each stageObjects as |obj|}}
     {{#if (eq selectedObject obj)}}
       {{#if selectedKeyframe}}
-        <div class="obj {{if (eq selectedObject obj) 'is-selected'}}" style={{selectedKeyframe.cssString}} {{action 'selectTimelineObject' obj}}></div>
+        <div class="obj {{if (eq selectedObject obj) 'is-selected'}}" style="{{selectedKeyframe.cssString}}" {{action 'selectTimelineObject' obj}}></div>
       {{else}}
-        <div class="obj {{if (eq selectedObject obj) 'is-selected'}}" style={{obj.cssBaseStylesString}} {{action 'selectTimelineObject' obj}}></div>
+        <div class="obj {{if (eq selectedObject obj) 'is-selected'}}" style="{{obj.cssBaseStylesString}}" {{action 'selectTimelineObject' obj}}></div>
       {{/if}}
     {{else}}
-      <div class="obj {{if (eq selectedObject obj) 'is-selected'}}" style={{obj.cssBaseStylesString}} {{action 'selectTimelineObject' obj}}></div>
+      <div class="obj {{if (eq selectedObject obj) 'is-selected'}}" style="{{obj.cssBaseStylesString}}" {{action 'selectTimelineObject' obj}}></div>
     {{/if}}
   {{/each}}
 </div>

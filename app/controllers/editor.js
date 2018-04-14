@@ -185,7 +185,7 @@ export default Ember.Controller.extend({
     },
 
     selectTimelineObject(obj) {
-      this.set('selectedKeyframe', false);
+      this.set('selectedKeyframe', null);
       this.set('selectedObject', obj);
     },
     selectKeyframeObject(keyframe, obj) {
@@ -196,6 +196,13 @@ export default Ember.Controller.extend({
     },
     removeObject(obj) {
       const objArray = this.get('stageObjects');
+      const selectedObj = this.get('selectedObject');
+
+      if (selectedObj === obj) {
+        this.set('selectedKeyframe', null);
+        this.set('selectedObject', null);
+      }
+
       objArray.removeObject(obj);
     }
   }
