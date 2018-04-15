@@ -10,6 +10,14 @@
   position: relative;
   width: calc(100vw - #{$toolbar-width} - 4rem);
 
+  .stage-bg {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
   .obj {
 
     &.is-selected {

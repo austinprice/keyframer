@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import { get } from '@ember/object';
+import $ from 'jquery';
 
 export default Ember.Controller.extend({
 
@@ -57,6 +58,10 @@ export default Ember.Controller.extend({
     ]);
 
     this.rewriteObjectCss();
+
+    $('.obj').click(function(e) {
+      e.stopPropagation();
+    })
   },
 
   availableKeyframes: [0,5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100],
@@ -216,6 +221,10 @@ export default Ember.Controller.extend({
     },
     stopAnimation() {
       this.set('playAnimation', false);
+    },
+    deselectAllObjects() {
+      this.set('selectedKeyframe', null);
+      this.set('selectedObject', null);
     }
   }
 

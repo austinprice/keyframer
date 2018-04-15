@@ -5,6 +5,7 @@
 </style>
 
 <div class="stage">
+  <div class="stage-bg" {{action 'deselectAllObjects'}}></div>
   {{#each stageObjects as |obj|}}
     {{#if (eq selectedObject obj)}}
       {{#if selectedKeyframe}}
@@ -34,7 +35,6 @@
     <div class="field-group toolbar-section">
       <label>Background</label>
       {{text-input-color keypressAction=(action 'rewriteStyles') value=selectedKeyframe.styles.background}}
-      {{text-input-percent keypressAction=(action 'rewriteStyles') value=selectedKeyframe.styles.opacity}}
     </div>
     <div class="field-group toolbar-section">
       <label>Border Radius</label>
@@ -63,7 +63,6 @@
     <div class="field-group toolbar-section">
       <label>Background</label>
       {{text-input-color keypressAction=(action 'rewriteStyles') value=selectedObject.baseStyles.background}}
-      {{text-input-percent keypressAction=(action 'rewriteStyles') value=selectedObject.baseStyles.opacity}}
     </div>
     <div class="field-group toolbar-section">
       <label>Border Radius</label>
