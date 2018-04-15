@@ -105,6 +105,7 @@
       display: inline-flex;
       flex-wrap: nowrap;
       justify-content: space-between;
+      position: relative;
       width: calc(99.7% - #{$timeline-x-width});
 
       span {
@@ -115,6 +116,19 @@
         width: 100%;
         //display: inline-block;
         //width: 4.45%;
+      }
+
+      .play-indicator {
+        animation-name: playIndicator;
+        animation-duration: 1s;
+        animation-iteration-count: infinite;
+        background: $primary;
+        border-radius: 15px;
+        display: inline-block;
+        height: 15px;
+        position: absolute;
+        top: 0;
+        width: 15px;
       }
     }
   }

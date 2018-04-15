@@ -14,7 +14,7 @@
         <div class="obj {{if (eq selectedObject obj) 'is-selected'}}" style="{{obj.cssBaseStylesString}}" {{action 'selectTimelineObject' obj}}></div>
       {{/if}}
     {{else}}
-      <div class="obj {{if (eq selectedObject obj) 'is-selected'}}" style="animation:{{if playAnimation obj.domId 'none'}};animation-duration:{{animationDuration}}s;animation-iteration-count: {{animationIteration}};{{obj.cssBaseStylesString}}" {{action 'selectTimelineObject' obj}}></div>
+      <div class="obj {{if (eq selectedObject obj) 'is-selected'}}" style="animation:{{if playAnimation obj.domId 'none'}};animation-duration:{{animationDuration}}s;animation-iteration-count:{{animationIteration}};{{obj.cssBaseStylesString}}" {{action 'selectTimelineObject' obj}}></div>
     {{/if}}
   {{/each}}
 </div>
@@ -23,7 +23,7 @@
   {{#if selectedKeyframe}}
     <div class="toolbar-section label-section dark-grey-bg">
       <label>{{selectedObject.name}} @ {{selectedKeyframe.position}}%</label>
-      <span class="remove-obj" {{action 'removeKeyframe' selectedKeyframe}}>Delete</span>
+      <span class="remove-obj" {{action 'removeKeyframe' selectedKeyframe}}>Remove</span>
     </div>
     <div class="field-group toolbar-section">
       <label>Position</label>
@@ -98,6 +98,9 @@
       <button {{action 'addObj'}}>+ Add Object</button>
     </div>
     <div class="timeline-percent-row">
+      {{#if playAnimation}}
+        <div class="play-indicator" style="animation-duration:{{animationDuration}}s;"></div>
+      {{/if}}
       <span>0%</span>
       <span>5%</span>
       <span>10%</span>
