@@ -123,12 +123,19 @@ export default Ember.Controller.extend({
     });
   },
 
+  stopAnimation() {
+    this.set('playAnimation', false);
+  },
+
   actions: {
     rewriteStyles() {
       this.rewriteObjectCss();
     },
 
     addObj() {
+      // Stop the animation
+      this.stopAnimation();
+
       // Grab the objects array
       const objArray = this.get('stageObjects');
 
@@ -224,7 +231,7 @@ export default Ember.Controller.extend({
       this.set('playAnimation', true);
     },
     stopAnimation() {
-      this.set('playAnimation', false);
+      this.stopAnimation();
     },
     deselectAllObjects() {
       this.set('selectedKeyframe', null);
