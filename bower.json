@@ -1,0 +1,6 @@
+{
+  "name": "keyframer",
+  "dependencies": {
+    "colpick": "2.0.2"
+  }
+}
