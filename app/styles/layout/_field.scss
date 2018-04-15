@@ -63,6 +63,20 @@
       @include base-text-input-content();
     }
   }
+
+  &.seconds {
+    position: relative;
+
+    #{$all-text-inputs} {
+      padding-right: 1.25rem;
+      width: 5rem;
+    }
+
+    &:after {
+      content: 'sec';
+      @include base-text-input-content();
+    }
+  }
 }
 
 

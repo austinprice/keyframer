@@ -34,8 +34,8 @@
   }
 
   &.secondary {
-    background: $light;
-    color: $primary;
+    background: shade($grey-light, 5%);
+    color: $dark;
     text-shadow: none;
   }
 
