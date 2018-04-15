@@ -15,6 +15,14 @@
   .toolbar-section {
     padding: 1rem;
     border-bottom: $border;
+
+    &.label-section {
+
+      label {
+        display: inline-block;
+        width: auto;
+      }
+    }
   }
 
   select {

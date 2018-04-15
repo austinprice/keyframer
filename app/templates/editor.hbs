@@ -21,8 +21,9 @@
 
 <div class="toolbar">
   {{#if selectedKeyframe}}
-    <div class="toolbar-section dark-grey-bg">
+    <div class="toolbar-section label-section dark-grey-bg">
       <label>{{selectedObject.name}} @ {{selectedKeyframe.position}}%</label>
+      <span class="remove-obj" {{action 'removeKeyframe' selectedKeyframe}}>Delete</span>
     </div>
     <div class="field-group toolbar-section">
       <label>Position</label>
@@ -49,8 +50,9 @@
       {{input type='number' keypressAction=(action 'rewriteStyles') value=selectedKeyframe.styles.opacity}}
     </div>
   {{else if selectedObject}}
-    <div class="toolbar-section dark-grey-bg">
+    <div class="toolbar-section label-section dark-grey-bg">
       <label>{{selectedObject.name}}</label>
+      <span class="remove-obj" {{action 'removeObject' selectedObject}}>Delete</span>
     </div>
     <div class="field-group toolbar-section">
       <label>Position</label>
@@ -125,7 +127,6 @@
         <span class="obj-info" {{action 'selectTimelineObject' obj}}>
           <span class="obj-color" style="background-color: #{{obj.baseStyles.background}}"></span>
           <span class="obj-name">{{obj.name}}</span>
-          <span class="remove-obj" {{action 'removeObject' obj}}>Delete</span>
         </span>
         <span class="obj-timeline">
           {{#each obj.keyframes as |keyframe|}}

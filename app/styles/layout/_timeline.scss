@@ -240,3 +240,19 @@
     }
   }
 }
+
+.remove-obj {
+  color: $dark;
+  cursor: pointer;
+  display: inline-block;
+  float: right;
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-top: 3px;
+  text-transform: uppercase;
+  vertical-align: middle;
+
+  &:hover {
+    color: $red;
+  }
+}
