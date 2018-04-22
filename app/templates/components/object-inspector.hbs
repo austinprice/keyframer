@@ -1,0 +1,33 @@
+<div class="toolbar">
+  <div class="toolbar-section label-section dark-grey-bg">
+    {{#if selectedKeyframe}}
+      <label>{{selectedObject.name}} @ {{selectedKeyframe.position}}%</label>
+      <span class="remove-obj" {{action 'removeKeyframe' selectedKeyframe}}>Remove</span>
+    {{else if selectedObject}}
+      <label>{{selectedObject.name}}</label>
+      <span class="remove-obj" {{action 'removeObject' selectedObject}}>Delete</span>
+    {{/if}}
+  </div>
+  {{#if selectedObject}}
+    <div class="field-group toolbar-section">
+      <label>Position</label>
+      {{text-input-pixels keypressAction=(action 'rewriteStyles') value=styles.left label="X"}}
+      {{text-input-pixels keypressAction=(action 'rewriteStyles') value=styles.top label="Y"}}
+      <br/>
+      {{text-input-pixels keypressAction=(action 'rewriteStyles') value=styles.width label="W"}}
+      {{text-input-pixels keypressAction=(action 'rewriteStyles') value=styles.height label="H"}}
+    </div>
+    <div class="field-group toolbar-section">
+      <label>Background</label>
+      {{text-input-color keypressAction=(action 'rewriteStyles') value=styles.background}}
+    </div>
+    <div class="field-group toolbar-section">
+      <label>Border Radius</label>
+      {{text-input-pixels keypressAction=(action 'rewriteStyles') value=styles.borderRadius}}
+    </div>
+    <div class="field-group toolbar-section">
+      <label>Opacity</label>
+      {{input type='number' key-up=(action 'rewriteStyles') value=styles.opacity}}
+    </div>
+  {{/if}}
+</div>

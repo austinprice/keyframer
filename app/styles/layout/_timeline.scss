@@ -223,6 +223,9 @@
 
               &:hover {
                 background: $dark;
+                margin-top: -2px;
+                height: 16px;
+                width: 16px;
               }
 
               &.is-selected {

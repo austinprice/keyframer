@@ -224,6 +224,7 @@ export default Ember.Controller.extend({
     },
     removeKeyframe(keyframe) {
       Ember.set(keyframe, 'active', false);
+      this.set('selectedKeyframe', null);
     },
     playAnimation() {
       this.set('selectedKeyframe', null);

@@ -19,7 +19,13 @@
   {{/each}}
 </div>
 
-<div class="toolbar">
+{{#if selectedKeyframe}}
+  {{object-inspector selectedKeyframe=selectedKeyframe selectedObject=selectedObject styles=selectedKeyframe.styles rewriteStyles=(action 'rewriteStyles') removeObject=(action 'removeObject') removeKeyframe=(action 'removeKeyframe')}}
+{{else}}
+  {{object-inspector selectedKeyframe=false selectedObject=selectedObject styles=selectedObject.baseStyles rewriteStyles=(action 'rewriteStyles') removeObject=(action 'removeObject') removeKeyframe=(action 'removeKeyframe')}}
+{{/if}}
+
+{{!--<div class="toolbar">
   {{#if selectedKeyframe}}
     <div class="toolbar-section label-section dark-grey-bg">
       <label>{{selectedObject.name}} @ {{selectedKeyframe.position}}%</label>
@@ -39,10 +45,6 @@
     </div>
     <div class="field-group toolbar-section">
       <label>Border Radius</label>
-      {{!--{{select-dropdown options=borderOptions value=selectedKeyframe.styles.borderStyle}}
-      <br/>
-      {{text-input-color keypressAction=(action 'rewriteStyles') value=selectedKeyframe.styles.borderColor}}
-      {{text-input-pixels keypressAction=(action 'rewriteStyles') value=selectedKeyframe.styles.borderWidth}}--}}
       {{text-input-pixels keypressAction=(action 'rewriteStyles') value=selectedKeyframe.styles.borderRadius}}
     </div>
     <div class="field-group toolbar-section">
@@ -68,10 +70,6 @@
     </div>
     <div class="field-group toolbar-section">
       <label>Border Radius</label>
-      {{!--{{select-dropdown options=borderOptions value=selectedObject.baseStyles.borderStyle}}
-      <br/>
-      {{text-input-color keypressAction=(action 'rewriteStyles') value=selectedObject.baseStyles.borderColor}}
-      {{text-input-pixels keypressAction=(action 'rewriteStyles') value=selectedObject.baseStyles.borderWidth}}--}}
       {{text-input-pixels keypressAction=(action 'rewriteStyles') value=selectedObject.baseStyles.borderRadius}}
     </div>
     <div class="field-group toolbar-section">
@@ -79,7 +77,7 @@
       {{input type='number' key-up=(action 'rewriteStyles') value=selectedObject.baseStyles.opacity}}
     </div>
   {{/if}}
-</div>
+</div>--}}
 
 <div class="timeline">
   <div class="timeline-controls-sidebar">
