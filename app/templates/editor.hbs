@@ -47,7 +47,7 @@
     </div>
     <div class="field-group toolbar-section">
       <label>Opacity</label>
-      {{input type='number' keypressAction=(action 'rewriteStyles') value=selectedKeyframe.styles.opacity}}
+      {{input type='number' key-up=(action 'rewriteStyles') value=selectedKeyframe.styles.opacity}}
     </div>
   {{else if selectedObject}}
     <div class="toolbar-section label-section dark-grey-bg">
@@ -76,7 +76,7 @@
     </div>
     <div class="field-group toolbar-section">
       <label>Opacity</label>
-      {{input type='number' keypressAction=(action 'rewriteStyles') value=selectedObject.baseStyles.opacity}}
+      {{input type='number' key-up=(action 'rewriteStyles') value=selectedObject.baseStyles.opacity}}
     </div>
   {{/if}}
 </div>
