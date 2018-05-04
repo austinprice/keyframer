@@ -29,5 +29,8 @@
       <label>Opacity</label>
       {{input type='number' key-up=(action 'rewriteStyles') value=styles.opacity}}
     </div>
+    <div class="field-group toolbar-section">
+      {{textarea value=styles.customCss}}
+    </div>
   {{/if}}
 </div>
