@@ -4,19 +4,24 @@
   {{/each}}
 </style>
 
-<div class="stage">
+<div class="stage" id="stage">
   <div class="stage-bg" {{action 'deselectAllObjects'}}></div>
   {{#each stageObjects as |obj|}}
     {{#if (eq selectedObject obj)}}
       {{#if selectedKeyframe}}
-        <div class="obj {{if (eq selectedObject obj) 'is-selected'}}" style="{{selectedKeyframe.cssString}}" {{action 'selectTimelineObject' obj}}></div>
+        {{!--<div class="obj {{if (eq selectedObject obj) 'is-selected'}}" style="{{selectedKeyframe.cssString}}" {{action 'selectTimelineObject' obj}}></div>--}}
+        {{stage-object className=(if (eq selectedObject obj) 'is-selected') styleString=selectedKeyframe.cssString selectAction=(action 'selectTimelineObject') obj=obj rewrite=(action 'rewriteStyles')}}
       {{else}}
-        <div class="obj {{if (eq selectedObject obj) 'is-selected'}}" style="{{obj.cssBaseStylesString}}" {{action 'selectTimelineObject' obj}}></div>
+        {{!--<div class="obj {{if (eq selectedObject obj) 'is-selected'}}" style="{{obj.cssBaseStylesString}}" {{action 'selectTimelineObject' obj}}></div>--}}
+        {{stage-object className=(if (eq selectedObject obj) 'is-selected') styleString=obj.cssBaseStylesString selectAction=(action 'selectTimelineObject') obj=obj rewrite=(action 'rewriteStyles')}}
       {{/if}}
     {{else}}
       <div class="obj {{if (eq selectedObject obj) 'is-selected'}}" style="animation:{{if playAnimation obj.domId 'none'}};animation-duration:{{animationDuration}}s;animation-iteration-count:{{animationIteration}};{{obj.cssBaseStylesString}}" {{action 'selectTimelineObject' obj}}></div>
+      {{stage-object className=(if (eq selectedObject obj) 'is-selected') styleString=obj.cssBaseStylesString selectAction=(action 'selectTimelineObject') obj=obj}}
     {{/if}}
   {{/each}}
+
+  <div class="obj" id="object" style="background: black; display: inline-block; width: 40px; height: 40px;"></div>
 </div>
 
 {{#if selectedKeyframe}}
@@ -24,60 +29,6 @@
 {{else}}
   {{object-inspector selectedKeyframe=false selectedObject=selectedObject styles=selectedObject.baseStyles rewriteStyles=(action 'rewriteStyles') removeObject=(action 'removeObject') removeKeyframe=(action 'removeKeyframe')}}
 {{/if}}
-
-{{!--<div class="toolbar">
-  {{#if selectedKeyframe}}
-    <div class="toolbar-section label-section dark-grey-bg">
-      <label>{{selectedObject.name}} @ {{selectedKeyframe.position}}%</label>
-      <span class="remove-obj" {{action 'removeKeyframe' selectedKeyframe}}>Remove</span>
-    </div>
-    <div class="field-group toolbar-section">
-      <label>Position</label>
-      {{text-input-pixels keypressAction=(action 'rewriteStyles') value=selectedKeyframe.styles.left label="X"}}
-      {{text-input-pixels keypressAction=(action 'rewriteStyles') value=selectedKeyframe.styles.top label="Y"}}
-      <br/>
-      {{text-input-pixels keypressAction=(action 'rewriteStyles') value=selectedKeyframe.styles.width label="W"}}
-      {{text-input-pixels keypressAction=(action 'rewriteStyles') value=selectedKeyframe.styles.height label="H"}}
-    </div>
-    <div class="field-group toolbar-section">
-      <label>Background</label>
-      {{text-input-color keypressAction=(action 'rewriteStyles') value=selectedKeyframe.styles.background}}
-    </div>
-    <div class="field-group toolbar-section">
-      <label>Border Radius</label>
-      {{text-input-pixels keypressAction=(action 'rewriteStyles') value=selectedKeyframe.styles.borderRadius}}
-    </div>
-    <div class="field-group toolbar-section">
-      <label>Opacity</label>
-      {{input type='number' key-up=(action 'rewriteStyles') value=selectedKeyframe.styles.opacity}}
-    </div>
-  {{else if selectedObject}}
-    <div class="toolbar-section label-section dark-grey-bg">
-      <label>{{selectedObject.name}}</label>
-      <span class="remove-obj" {{action 'removeObject' selectedObject}}>Delete</span>
-    </div>
-    <div class="field-group toolbar-section">
-      <label>Position</label>
-      {{text-input-pixels keypressAction=(action 'rewriteStyles') value=selectedObject.baseStyles.left label="X"}}
-      {{text-input-pixels keypressAction=(action 'rewriteStyles') value=selectedObject.baseStyles.top label="Y"}}
-      <br/>
-      {{text-input-pixels keypressAction=(action 'rewriteStyles') value=selectedObject.baseStyles.width label="W"}}
-      {{text-input-pixels keypressAction=(action 'rewriteStyles') value=selectedObject.baseStyles.height label="H"}}
-    </div>
-    <div class="field-group toolbar-section">
-      <label>Background</label>
-      {{text-input-color keypressAction=(action 'rewriteStyles') value=selectedObject.baseStyles.background}}
-    </div>
-    <div class="field-group toolbar-section">
-      <label>Border Radius</label>
-      {{text-input-pixels keypressAction=(action 'rewriteStyles') value=selectedObject.baseStyles.borderRadius}}
-    </div>
-    <div class="field-group toolbar-section">
-      <label>Opacity</label>
-      {{input type='number' key-up=(action 'rewriteStyles') value=selectedObject.baseStyles.opacity}}
-    </div>
-  {{/if}}
-</div>--}}
 
 <div class="timeline">
   <div class="timeline-controls-sidebar">
